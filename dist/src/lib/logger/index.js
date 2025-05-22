@@ -1,33 +1,31 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Logger = void 0;
-const cols_1 = require("lib/utils/cols");
-const getTimestamp = () => {
-    return new Date().toISOString();
-};
-class Logger {
-    static log(status, message) {
-        const timestamp = getTimestamp().gray;
-        const levelTag = (0, cols_1.colorStatus)(status);
-        console.log(`${timestamp} ${levelTag} ${message}`);
-    }
-    static info(message) {
-        this.log("INFO", message);
-    }
-    static warn(message) {
-        this.log("WARN", message);
-    }
-    static error(message) {
-        this.log("ERROR", message);
-    }
-    static success(message) {
-        this.log("SUCCESS", message);
-    }
-    static debug(message) {
-        if (process.env.NODE_ENV === "development") {
-            this.log("DEBUG", message);
-        }
-    }
-}
-exports.Logger = Logger;
+// import { LogStatus } from "lib/utils";
+// import { colorStatus } from "lib/utils/toolkits";
+// const getTimestamp = (): string => {
+//   return new Date().toISOString();
+// };
+// export class Logger {
+//   private static log(status: LogStatus, message: string) {
+//     const timestamp = getTimestamp().gray;
+//     const levelTag = colorStatus(status);
+//     console.log(`${timestamp} ${levelTag} ${message}`);
+//   }
+//   static info(message: string) {
+//     this.log("INFO", message);
+//   }
+//   static warn(message: string) {
+//     this.log("WARN", message);
+//   }
+//   static error(message: string) {
+//     this.log("ERROR", message);
+//   }
+//   static success(message: string) {
+//     this.log("SUCCESS", message);
+//   }
+//   static debug(message: string) {
+//     if (process.env.NODE_ENV === "development") {
+//       this.log("DEBUG", message);
+//     }
+//   }
+// }
 //# sourceMappingURL=index.js.map

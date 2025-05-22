@@ -1,5 +1,4 @@
-import { LogStatus } from "lib/utils";
-import { colorStatus } from "lib/utils/toolkits";
+import { LogStatus, colorStatus } from "../utils";
 
 const getTimestamp = (): string => {
   return new Date().toISOString();

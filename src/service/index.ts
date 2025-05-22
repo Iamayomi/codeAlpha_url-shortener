@@ -11,11 +11,14 @@ export async function shortenUrl(originalUrl: string): Promise<string> {
   const shortCode = nanoid(8);
 
   const existingUrl = await Url.findOne({ originalUrl });
+  console.log(BASE_URL);
+
   if (existingUrl) {
     return `${BASE_URL}/${existingUrl.shortCode}`;
   }
 
   const newUrl = new Url({ shortCode, originalUrl });
+
   await newUrl.save();
 
   return `${BASE_URL}/${newUrl.shortCode}`;

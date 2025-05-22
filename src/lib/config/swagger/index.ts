@@ -3,13 +3,13 @@ import swaggerJsDoc, { Options } from "swagger-jsdoc";
 import { version } from "../../../../package.json";
 import { customEnvs } from "../env";
 
-const description = fs.readFileSync("src/library/docs/description.md").toString();
+// const description = fs.readFileSync("src/library/docs/description.md").toString();
 
 const swagger: Options = {
   swaggerDefinition: {
     info: {
       version,
-      description: description,
+      // description: description,
       title: ``,
       contact: { name: "Amodu Ayomide", email: "ayomidesherif2019@gmail.com" },
       servers: [{ url: `http://localhost:${customEnvs.port}/api/v1` }],

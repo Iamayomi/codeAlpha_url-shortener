@@ -1,4 +1,4 @@
-import { IUrl } from "models/interface";
+import { IUrl } from "../interface";
 import mongoose, { Schema } from "mongoose";
 
 const urlSchema = new mongoose.Schema<IUrl>({

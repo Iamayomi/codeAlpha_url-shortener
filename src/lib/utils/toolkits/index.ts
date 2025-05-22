@@ -1,21 +1,21 @@
 import { isWebUri } from "valid-url";
 
-import { blue, yellow, red, rainbow, magenta } from "colors";
+import { blue, yellow, red, magenta, green } from "colors";
 
 import { LogStatus } from "../types";
 
 export const colorStatus = (status: LogStatus): string => {
   switch (status) {
     case "INFO":
-      return `[INFO].${blue.bold}`;
+      return blue.bold("[INFO]");
     case "WARN":
-      return `[WARN].${yellow.bold}`;
+      return yellow.bold("[WARN]");
     case "ERROR":
-      return `[ERROR].${red.bold}`;
+      return red.bold("[ERROR]");
     case "SUCCESS":
-      return `[SUCCESS].${rainbow.bold}`;
+      return green.bold("[SUCCESS]");
     case "DEBUG":
-      return `[DEBUG].${magenta.bold}`;
+      return magenta.bold("[DEBUG]");
     default:
       return status;
   }
