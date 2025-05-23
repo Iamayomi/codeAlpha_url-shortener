@@ -1,4 +1,4 @@
 export * from "./constants";
 export * from "./cors";
 export * from "./env";
-export * from "./swagger";
+export * as swagger from "./swagger";

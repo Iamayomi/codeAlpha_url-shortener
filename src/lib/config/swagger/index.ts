@@ -3,14 +3,15 @@ import swaggerJsDoc, { Options } from "swagger-jsdoc";
 import { version } from "../../../../package.json";
 import { customEnvs } from "../env";
 
-// const description = fs.readFileSync("src/library/docs/description.md").toString();
+const description = fs.readFileSync("src/lib/docs/description.md").toString();
 
 const swagger: Options = {
   swaggerDefinition: {
+    openapi: "3.0.0",
     info: {
       version,
-      // description: description,
-      title: ``,
+      description,
+      title: `Url Shorten`,
       contact: { name: "Amodu Ayomide", email: "ayomidesherif2019@gmail.com" },
       servers: [{ url: `http://localhost:${customEnvs.port}/api/v1` }],
       license: {
@@ -19,7 +20,7 @@ const swagger: Options = {
       },
     },
   },
-  apis: ["./src/library/docs/*/*.yml", "./src/library/docs/*.yml"],
+  apis: ["./src/lib/docs/*/*.yml", "./src/lib/docs/*.yml"],
 };
 
 export const config = swaggerJsDoc(swagger);

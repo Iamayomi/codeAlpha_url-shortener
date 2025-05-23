@@ -5,14 +5,14 @@ import "dotenv/config";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connect } from "mongoose";
+import swaggerUi from "swagger-ui-express";
+
 import router from "./routes";
-
-import { errorHandler } from "./middleware/errorHandler";
-import { corsOptions, customEnvs } from "./lib/config";
+import { errorHandler, rateLimiter } from "./middleware";
+import { corsOptions, customEnvs, swagger } from "./lib";
 import { Logger } from "./lib";
-import { rateLimiter } from "./middleware/ratelimiter";
 
-const app: Express = express();
+const app = express();
 const PORT = customEnvs.port || 5000;
 
 // Middleware
@@ -22,6 +22,15 @@ app.use(helmet()); // Security headers
 app.use(morgan("combined")); // Request logging
 app.use(express.json());
 app.use(rateLimiter);
+
+// app.use(
+//   "/api/v1/doc(.html)?",
+//   swaggerUi,
+//   swaggerUi.setup(swagger.config, {
+//     customCss: ".swagger-ui .topbar { display: none }",
+//   })
+// );
+
 app.use("/api/v1", router);
 
 // Handle synchronous errors
