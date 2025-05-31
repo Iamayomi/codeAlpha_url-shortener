@@ -5,12 +5,10 @@ import "dotenv/config";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connect } from "mongoose";
-import swaggerUi from "swagger-ui-express";
 
 import router from "./routes";
 import { errorHandler, rateLimiter } from "./middleware";
-import { corsOptions, customEnvs, swagger } from "./lib";
-import { Logger } from "./lib";
+import { corsOptions, customEnvs, Logger, swagger } from "./lib";
 
 const app = express();
 const PORT = customEnvs.port || 5000;
@@ -23,23 +21,12 @@ app.use(morgan("combined")); // Request logging
 app.use(express.json());
 app.use(rateLimiter);
 
-// app.use(
-//   "/api/v1/doc(.html)?",
-//   swaggerUi,
-//   swaggerUi.setup(swagger.config, {
-//     customCss: ".swagger-ui .topbar { display: none }",
-//   })
-// );
-
 app.use("/api/v1", router);
 
 // Handle synchronous errors
 process.on("uncaughtException", (err) => {
   // Log error only in development environment
-  customEnvs.env === "development" &&
-    // console.log(`${["API UNCAUGHTEXCEPTION ERROR: "]} ${err.message} ${"\n\nERROR STACK: "} ${err.stack}`);
-
-    Logger.error(`${["API UNCAUGHTEXCEPTION ERROR: "]} ${err.message} ${"\n\nERROR STACK: "} ${err.stack}`);
+  customEnvs.env === "development" && Logger.error(`${["API UNCAUGHTEXCEPTION ERROR: "]} ${err.message} ${"\n\nERROR STACK: "} ${err.stack}`);
 });
 
 // Asynchronous error handler
@@ -50,15 +37,10 @@ const startServer = async () => {
   try {
     await connect(customEnvs.mongo_url!);
 
-    // console.log("Connection to database established successfully");
-
     Logger.success("Connection to database established successfully");
-    // console.log(`Server is listening on port: ${PORT}`);
 
     app.listen(PORT, () => Logger.success(`Server is listening on port: ${PORT}`));
   } catch (error) {
-    // console.log("Something went wrong, please try again :::");
-
     Logger.error("Something went wrong, please try again :::");
   }
 };
